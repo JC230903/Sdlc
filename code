@@ -1,0 +1,50 @@
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+
+# Define the milestones and corresponding dates
+milestones = [
+    ("Project Initiation", "2023-02-15"),
+    ("Project Setup", "2023-02-16"),
+    ("Data Collection and Preprocessing", "2023-02-17"),
+    ("Model Development", "2023-02-18"),
+    ("Model Testing and Validation", "2023-02-19"),
+    ("Development of Recommendation Engine", "2023-02-20"),
+    ("User Interface Development", "2023-02-21"),
+    ("Integration and Testing", "2023-02-22"),
+    ("Documentation and Packaging", "2023-02-23"),
+    ("Deployment and Launch", "2023-02-24"),
+    ("Ongoing Maintenance and Updates", "2023-02-25")
+]
+
+# Convert dates to datetime objects
+milestones_dates = [mdates.datestr2num(date) for _, date in milestones]
+
+# Create a figure and axis
+fig, ax = plt.subplots()
+
+# Plot the milestones as vertical lines
+ax.vlines(milestones_dates, ymin=0, ymax=1, color='blue', linewidth=2)
+
+# Set the y-axis limits and hide ticks
+ax.set_ylim(0, 1)
+ax.yaxis.set_visible(False)
+
+# Set the x-axis limits and format
+ax.set_xlim(min(milestones_dates), max(milestones_dates))
+ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %d'))
+ax.xaxis.set_major_locator(mdates.DayLocator(interval=1))
+
+# Set the title and labels
+ax.set_title('Project Timeline')
+ax.set_xlabel('Dates')
+
+# Add milestone labels
+for i, (milestone, date) in enumerate(milestones):
+    ax.text(milestones_dates[i], 0.5, milestone, rotation=90, ha='right', va='center')
+
+# Rotate x-axis labels for better readability
+plt.xticks(rotation=45, ha='right')
+
+# Show the plot
+plt.tight_layout()
+plt.show()
